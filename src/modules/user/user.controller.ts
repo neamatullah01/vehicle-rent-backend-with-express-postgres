@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { userServices } from "./user.service";
+import { JwtPayload } from "jsonwebtoken";
 
 const getAllUsers = async (req: Request, res: Response) => {
   try {
@@ -19,11 +20,20 @@ const getAllUsers = async (req: Request, res: Response) => {
 
 const updateUser = async (req: Request, res: Response) => {
   try {
-    const result = await userServices.updateUserIntoDb(
-      req.params.userId!,
-      req.body
-    );
-    console.log(result);
+    const loggedInUser = req.user as JwtPayload;
+    const targetUserId = Number(req.params.userId);
+    let result: any;
+    if (loggedInUser.role === "admin") {
+      result = await userServices.updateUserIntoDb(targetUserId!, req.body);
+    } else if (loggedInUser.role === "customer") {
+      if (loggedInUser.id !== targetUserId) {
+        return res.status(403).json({
+          success: false,
+          message: "Permission denied. You can update only your own profile.",
+        });
+      }
+      result = await userServices.updateUserIntoDb(targetUserId!, req.body);
+    }
 
     if (result.rowCount === 0) {
       return res.status(404).json({

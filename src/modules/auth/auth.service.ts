@@ -35,6 +35,7 @@ const loginUserFromDb = async (payload: Record<string, unknown>) => {
   }
   const token = jwt.sign(
     {
+      id: user.id,
       name: user.name,
       email: user.email,
       role: user.role,

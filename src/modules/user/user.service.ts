@@ -9,7 +9,7 @@ const getALLUsersFromDb = async () => {
 };
 
 const updateUserIntoDb = async (
-  id: string,
+  id: number,
   payload: Record<string, unknown>
 ) => {
   const { name, email, password, phone, role } = payload;
@@ -29,7 +29,6 @@ const updateUserIntoDb = async (
         `,
     [name, email, hashedPass, phone, role, id]
   );
-  console.log(result);
 
   delete result.rows[0].password;
   return result;
