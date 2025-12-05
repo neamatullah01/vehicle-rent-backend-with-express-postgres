@@ -1,7 +1,7 @@
 import { Pool } from "pg";
 import config from ".";
 
-const pool = new Pool({
+export const pool = new Pool({
   connectionString: config.connection_str,
 });
 
@@ -23,7 +23,7 @@ const initDB = async () => {
         vehicle_name VARCHAR(250) NOT NULL,
         type VARCHAR(20) CHECK (type IN ('car', 'bike', 'van', 'SUV')),
         registration_number VARCHAR(50) NOT NULL UNIQUE,
-        daily_rent_price NUMERIC(10,2) NOT NULL CHECK (daily_rent_price > 0),
+        daily_rent_price INT NOT NULL CHECK (daily_rent_price > 0),
         availability_status VARCHAR(20) CHECK (availability_status IN ('available', 'booked'))
         )
         `);
@@ -35,7 +35,7 @@ const initDB = async () => {
         vehicle_id INT NOT NULL REFERENCES vehicles(id),
         rent_start_date DATE NOT NULL,
         rent_end_date DATE NOT NULL CHECK (rent_end_date >= rent_start_date),
-        total_price NUMERIC(10,2) NOT NULL CHECK (total_price > 0),
+        total_price INT NOT NULL CHECK (total_price > 0),
         status VARCHAR(20) CHECK (status IN ('active', 'cancelled', 'returned'))
         )
         `);
