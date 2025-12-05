@@ -23,6 +23,25 @@ const createVehicleIntoDb = async (payload: Record<string, unknown>) => {
   return result;
 };
 
+const getAllVehicleFromDb = async () => {
+  const result = pool.query(`
+        SELECT * FROM vehicles
+        `);
+  return result;
+};
+
+const getSingleVehicleFromDb = async (id: string) => {
+  const result = await pool.query(
+    `
+    SELECT * FROM vehicles WHERE id=$1
+    `,
+    [id]
+  );
+  return result;
+};
+
 export const vehicleServices = {
   createVehicleIntoDb,
+  getAllVehicleFromDb,
+  getSingleVehicleFromDb,
 };
