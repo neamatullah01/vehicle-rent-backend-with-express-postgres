@@ -45,6 +45,7 @@ const loginUserFromDb = async (payload: Record<string, unknown>) => {
       expiresIn: "7d",
     }
   );
+  delete user.password;
   return { token, user };
 };
 

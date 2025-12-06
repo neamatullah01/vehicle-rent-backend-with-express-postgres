@@ -4,11 +4,15 @@ const addBookingsIntoDb = async (payload: Record<string, unknown>) => {
   const { customer_id, vehicle_id, rent_start_date, rent_end_date } = payload;
 
   const vehicleDetails = await pool.query(
-    `SELECT vehicle_name, daily_rent_price FROM vehicles WHERE id = $1`,
+    `SELECT vehicle_name, daily_rent_price,availability_status FROM vehicles WHERE id = $1`,
     [vehicle_id]
   );
 
   if (vehicleDetails.rows.length === 0) {
+    return false;
+  }
+  const availableBooking = vehicleDetails.rows[0].availability_status;
+  if (availableBooking === "booked") {
     return false;
   }
   const dailyRate = vehicleDetails.rows[0].daily_rent_price;
@@ -37,6 +41,7 @@ const addBookingsIntoDb = async (payload: Record<string, unknown>) => {
 
   const booking = result.rows[0];
   const vehicle = vehicleDetails.rows[0];
+  delete vehicle.availability_status;
   return { ...booking, vehicle };
 };
 
