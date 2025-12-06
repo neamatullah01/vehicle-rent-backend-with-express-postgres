@@ -50,5 +50,38 @@ Follow these steps to run the project on your local machine.
 ## 1️⃣ Clone the Repository
 
 ```bash
-git clone <https://github.com/neamatullah01/vehicle-rent-backend-with-express-postgres.git>
+git clone https://github.com/neamatullah01/vehicle-rent-backend-with-express-postgres.git
+```
+
+```bash
+cd <your-project-folder>
+```
+
+## 2️⃣ Install Dependencies
+
+```bash
+npm install
+```
+
+## 3️⃣ Create a .env File
+
+```bash
+PORT=5000
+DATABASE_URL=postgresql://<user>:<password>@<host>:<port>/<dbname>
+JWT_SECRET=your_jwt_secret
+
+```
+
+## 4️⃣ Start the Development Server
+
+```bash
+npm run dev
+
+```
+
+The API will run at:
+
+```bash
+http://localhost:5000
+
 ```
