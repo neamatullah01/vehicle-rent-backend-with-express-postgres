@@ -67,7 +67,7 @@ npm install
 
 ```bash
 PORT=5000
-DATABASE_URL=postgresql://<user>:<password>@<host>:<port>/<dbname>
+CONNECTION_STR=postgresql://<user>:<password>@<host>:<port>/<dbname>
 JWT_SECRET=your_jwt_secret
 
 ```
