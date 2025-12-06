@@ -24,7 +24,7 @@ const verify = (...roles: string[]) => {
       if (user.rows.length === 0) {
         return res.status(401).json({
           success: false,
-          message: "Unauthorized access",
+          message: "Unauthorized invalid token",
         });
       }
       req.user = decoded;
