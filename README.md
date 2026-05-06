@@ -51,12 +51,6 @@ This backend system provides a complete RESTful API for a vehicle rental busines
 
 ---
 
-## 📸 Screenshots / GIFs
-
-> _Add screenshots or demo GIFs of your API responses, Postman collections, or a frontend client here._
-
----
-
 ## ⚙️ Setup Instructions
 
 ### 1. Clone the Repository
@@ -133,8 +127,4 @@ All protected routes require a valid `Authorization: Bearer <token>` header. Adm
 
 **Live URL:** [https://vehicle-rental-system-mauve.vercel.app](https://vehicle-rental-system-mauve.vercel.app)
 
-
-```
-Admin Email:    admin@example.com
-Admin Password: ************
 ```
